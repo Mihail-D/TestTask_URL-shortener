@@ -43,7 +43,7 @@ hs_err_pid*
 # IntelliJ
 */out/
 /.gitignore
-*/target
+/target
 /db/
 *.mv.db
 *.trace.db
