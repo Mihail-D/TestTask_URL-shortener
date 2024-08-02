@@ -1,4 +1,4 @@
-CREATE TABLE links_vault (
+CREATE TABLE shortener_db (
     id INT AUTO_INCREMENT PRIMARY KEY,
     short_link VARCHAR(255) NOT NULL,
     original_link VARCHAR(2048) NOT NULL,
