@@ -1,5 +1,6 @@
 package ru.trial.assignments.urlshortener.link.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +16,11 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("originalLink")
     @Column(name = "original_link", nullable = false, unique = true)
     private String originalLink;
 
+    @JsonProperty("shortLink")
     @Column(name = "short_link", nullable = false, unique = true)
     private String shortLink;
 

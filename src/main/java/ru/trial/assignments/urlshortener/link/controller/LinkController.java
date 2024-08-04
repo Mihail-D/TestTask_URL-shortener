@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trial.assignments.urlshortener.link.model.Link;
+import ru.trial.assignments.urlshortener.link.model.LinkRequest;
 import ru.trial.assignments.urlshortener.link.service.LinkService;
 
 import java.util.Optional;
@@ -21,15 +22,18 @@ public class LinkController {
         this.linkService = linkService;
     }
 
-    @PostMapping("/link")
-    public ResponseEntity<Link> createLink(@RequestBody Link link) {
-        log.info("Received request to create link: {}", link);
-        Optional<Link> existingLink = linkService.findByOriginalLink(link.getOriginalLink());
+    @PostMapping()
+    public ResponseEntity<Link> createLink(@RequestBody LinkRequest linkRequest) {
+        String originalLink = linkRequest.getOriginalLink();
+        log.info("Received request to create link: {}", originalLink);
+        Optional<Link> existingLink = linkService.findByOriginalLink(originalLink);
+
         if (existingLink.isPresent()) {
             log.warn("Link already exists: {}", existingLink.get());
             return ResponseEntity.status(409).body(existingLink.get());
         }
-        Link savedLink = linkService.saveLink(link);
+
+        Link savedLink = linkService.saveLink(originalLink);
         log.info("Link saved successfully: {}", savedLink);
         return ResponseEntity.ok(savedLink);
     }
