@@ -29,6 +29,11 @@ public class LinkService {
         return link.getShortLink();
     }
 
+
+    public Optional<Link> findByShortLink(String shortLink) {
+        return linkRepository.findByShortLink(shortLink);
+    }
+
     public Optional<Link> findByOriginalLink(String originalLink) {
         return linkRepository.findByOriginalLink(originalLink);
     }
