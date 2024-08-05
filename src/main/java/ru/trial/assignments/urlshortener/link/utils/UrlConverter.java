@@ -12,7 +12,7 @@ public class UrlConverter {
         String str = url.replaceAll("https?://|[:/]|[^a-z]", ""); // practicumyandexruprofilejavadeveloper
 
         Set<Character> uniqueChars = new HashSet<>();
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder().append("/l/");
 
         for (char c : str.toCharArray()) {
             if (uniqueChars.add(c)) {
@@ -20,7 +20,7 @@ public class UrlConverter {
             }
         }
 
-        result.append(TimeCheck.getTimeStamp());
+        result.append(TimeCheck.getTimeStamp()).append(".ly");
 
         return result.toString();
     }

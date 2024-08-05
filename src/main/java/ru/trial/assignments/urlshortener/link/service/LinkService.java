@@ -18,13 +18,15 @@ public class LinkService {
         this.linkRepository = linkRepository;
     }
 
-    public Link saveLink(String originalUrl) {
+    public String saveLink(String originalUrl) {
         String shortUrl = UrlConverter.encodeUrl(originalUrl);
         Link link = new Link();
         link.setOriginalLink(originalUrl);
         link.setShortLink(shortUrl);
 
-        return linkRepository.save(link);
+        linkRepository.save(link);
+
+        return link.getShortLink();
     }
 
     public Optional<Link> findByOriginalLink(String originalLink) {

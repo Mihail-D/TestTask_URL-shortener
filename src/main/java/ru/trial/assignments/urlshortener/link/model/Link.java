@@ -11,7 +11,6 @@ import lombok.Setter;
 @Table(name = "shortener_db")
 public class Link {
 
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

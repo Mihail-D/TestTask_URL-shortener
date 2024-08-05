@@ -16,6 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/generate")
 public class LinkController {
+
     private final LinkService linkService;
 
     public LinkController(LinkService linkService) {
@@ -23,18 +24,15 @@ public class LinkController {
     }
 
     @PostMapping()
-    public ResponseEntity<Link> createLink(@RequestBody LinkRequest linkRequest) {
+    public ResponseEntity<String> createLink(@RequestBody LinkRequest linkRequest) {
         String originalLink = linkRequest.getOriginalLink();
-        log.info("Received request to create link: {}", originalLink);
         Optional<Link> existingLink = linkService.findByOriginalLink(originalLink);
 
         if (existingLink.isPresent()) {
-            log.warn("Link already exists: {}", existingLink.get());
-            return ResponseEntity.status(409).body(existingLink.get());
+            return ResponseEntity.status(409).body(originalLink);
         }
 
-        Link savedLink = linkService.saveLink(originalLink);
-        log.info("Link saved successfully: {}", savedLink);
-        return ResponseEntity.ok(savedLink);
+        String shortLink = linkService.saveLink(originalLink);
+        return ResponseEntity.ok(shortLink);
     }
 }
