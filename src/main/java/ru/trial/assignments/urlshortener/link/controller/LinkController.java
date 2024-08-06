@@ -21,7 +21,7 @@ public class LinkController {
     }
 
     @PostMapping("/generate")
-    public ResponseEntity<String> createLink(@RequestBody LinkRequest linkRequest) {
+    public ResponseEntity<String> createShortLink(@RequestBody LinkRequest linkRequest) {
         String originalLink = linkRequest.getOriginalLink();
         Optional<Link> existingLink = linkService.findByOriginalLink(originalLink);
 
@@ -29,7 +29,7 @@ public class LinkController {
             return ResponseEntity.status(409).body(originalLink);
         }
 
-        String shortLink = "/l/"+linkService.saveLink(originalLink);
+        String shortLink = "/l/" + linkService.createShortLink(originalLink);
         return ResponseEntity.ok(shortLink);
     }
 

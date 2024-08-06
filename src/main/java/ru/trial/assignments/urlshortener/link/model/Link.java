@@ -3,6 +3,7 @@ package ru.trial.assignments.urlshortener.link.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -23,5 +24,8 @@ public class Link {
     @Column(name = "short_link", nullable = false, unique = true)
     private String shortLink;
 
-
+    @NonNull
+    @JsonProperty("count")
+    @Column(name = "count")
+    private Long count;
 }

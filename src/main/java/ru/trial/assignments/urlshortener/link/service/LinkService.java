@@ -18,12 +18,12 @@ public class LinkService {
         this.linkRepository = linkRepository;
     }
 
-    public String saveLink(String originalUrl) {
+    public String createShortLink(String originalUrl) {
         String shortUrl = UrlConverter.encodeUrl(originalUrl);
         Link link = new Link();
         link.setOriginalLink(originalUrl);
         link.setShortLink(shortUrl);
-
+        link.setCount(1L);
         linkRepository.save(link);
 
         return link.getShortLink();
@@ -31,7 +31,10 @@ public class LinkService {
 
 
     public Optional<Link> findByShortLink(String shortLink) {
-        return linkRepository.findByShortLink(shortLink);
+        Link link = linkRepository.findByShortLink(shortLink).orElseThrow();
+        link.setCount(link.getCount() + 1);
+        linkRepository.save(link);
+        return Optional.of(link);
     }
 
     public Optional<Link> findByOriginalLink(String originalLink) {

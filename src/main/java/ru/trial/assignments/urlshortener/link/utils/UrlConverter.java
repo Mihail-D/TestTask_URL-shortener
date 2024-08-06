@@ -9,7 +9,7 @@ import java.util.Set;
 public class UrlConverter {
 
     public String encodeUrl(String url) {
-        String str = url.replaceAll("https?://|[:/]|[^a-z]", ""); // practicumyandexruprofilejavadeveloper
+        String str = url.replaceAll("https?://|[:/]|[^a-z]", "");
 
         Set<Character> uniqueChars = new HashSet<>();
         StringBuilder result = new StringBuilder();
