@@ -26,7 +26,7 @@ public class LinkController {
         Optional<Link> existingLink = linkService.findByOriginalLink(originalLink);
 
         if (existingLink.isPresent()) {
-            return ResponseEntity.status(409).body(originalLink);
+            return ResponseEntity.ok("/l/" + existingLink.get().getShortLink());
         }
 
         String shortLink = "/l/" + linkService.createShortLink(originalLink);
