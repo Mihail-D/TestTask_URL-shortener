@@ -28,4 +28,25 @@ public class Link {
     @JsonProperty("count")
     @Column(name = "count")
     private Long count;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Link link = (Link) o;
+        return getId().equals(link.getId()) && getOriginalLink().equals(link.getOriginalLink()) && getShortLink().equals(link.getShortLink());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getOriginalLink().hashCode();
+        result = 31 * result + getShortLink().hashCode();
+        return result;
+    }
 }

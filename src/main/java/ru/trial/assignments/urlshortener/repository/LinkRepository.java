@@ -1,4 +1,4 @@
-package ru.trial.assignments.urlshortener.link.repository;
+package ru.trial.assignments.urlshortener.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.trial.assignments.urlshortener.link.model.Link;
