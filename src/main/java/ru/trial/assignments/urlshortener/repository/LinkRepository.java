@@ -1,6 +1,8 @@
 package ru.trial.assignments.urlshortener.repository;
 
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.trial.assignments.urlshortener.link.model.Link;
@@ -16,4 +18,7 @@ public interface LinkRepository extends JpaRepository<Link, Long> {
 
     @Query("SELECT l FROM Link l ORDER BY l.count DESC")
     List<Link> findTop3Links();
+
+    @Query("SELECT l FROM Link l ORDER BY l.count DESC")
+    Page<Link> findAllByOrderByCountDesc(Pageable pageable);
 }

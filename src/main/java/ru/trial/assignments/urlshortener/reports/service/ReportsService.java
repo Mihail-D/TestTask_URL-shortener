@@ -1,6 +1,8 @@
 package ru.trial.assignments.urlshortener.reports.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.trial.assignments.urlshortener.link.model.Link;
 import ru.trial.assignments.urlshortener.reports.model.StatisticsResponse;
@@ -54,5 +56,20 @@ public class ReportsService {
         link.ifPresent(l -> response.setRank(rank));
 
         return response;
+    }
+
+    public List<StatisticsResponse> getPaginatedStats(int page, int count) {
+        Pageable pageable = PageRequest.of(page - 1, count);
+        return linkRepository.findAllByOrderByCountDesc(pageable)
+                .stream()
+                .map(link -> {
+                    StatisticsResponse response = new StatisticsResponse();
+                    response.setOriginalLink(link.getOriginalLink());
+                    response.setShortLink(link.getShortLink());
+                    response.setCount(link.getCount());
+                    response.setRank(0);
+                    return response;
+                })
+                .collect(Collectors.toList());
     }
 }
