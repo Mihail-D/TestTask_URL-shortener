@@ -1,4 +1,4 @@
-package ru.trial.assignments.urlshortener.link.utils;
+package ru.trial.assignments.urlshortener.utils;
 
 import lombok.experimental.UtilityClass;
 

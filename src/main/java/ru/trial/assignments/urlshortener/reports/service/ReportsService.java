@@ -51,7 +51,7 @@ public class ReportsService {
         int rank = getPositionInTop(shortLink);
 
         link.ifPresent(l -> response.setOriginalLink(l.getOriginalLink()));
-        link.ifPresent(l -> response.setShortLink(l.getShortLink()));
+        link.ifPresent(l -> response.setShortLink("/l/"+ l.getShortLink()));
         link.ifPresent(l -> response.setCount(l.getCount()));
         link.ifPresent(l -> response.setRank(rank));
 

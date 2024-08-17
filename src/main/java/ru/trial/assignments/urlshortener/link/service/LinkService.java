@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.trial.assignments.urlshortener.link.model.Link;
 import ru.trial.assignments.urlshortener.repository.LinkRepository;
-import ru.trial.assignments.urlshortener.link.utils.UrlConverter;
+import ru.trial.assignments.urlshortener.utils.UrlConverter;
 
 import java.util.Optional;
 
