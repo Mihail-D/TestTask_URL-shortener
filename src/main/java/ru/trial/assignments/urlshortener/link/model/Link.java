@@ -2,8 +2,8 @@ package ru.trial.assignments.urlshortener.link.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -16,15 +16,17 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Original link cannot be null")
     @JsonProperty("originalLink")
     @Column(name = "original_link", nullable = false, unique = true)
     private String originalLink;
 
+    @NotNull(message = "Short link cannot be null")
     @JsonProperty("shortLink")
     @Column(name = "short_link", nullable = false, unique = true)
     private String shortLink;
 
-    @NonNull
+    @NotNull(message = "Count value cannot be null")
     @JsonProperty("count")
     @Column(name = "count")
     private Long count;
