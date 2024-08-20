@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.trial.assignments.urlshortener.link.model.Link;
 import ru.trial.assignments.urlshortener.reports.model.StatisticsResponse;
 import ru.trial.assignments.urlshortener.repository.LinkRepository;
+import ru.trial.assignments.urlshortener.utils.Validator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class ReportsService {
     }
 
     public int getPositionInTop(String shortLink) {
+        Validator.validateShortLink(shortLink);
         Long[] arr = getTop3Links().values().toArray(Long[]::new);
         Arrays.sort(arr, Collections.reverseOrder());
         int pos = 0;
@@ -46,6 +48,7 @@ public class ReportsService {
     }
 
     public StatisticsResponse getLinkInTop(String shortLink) {
+        Validator.validateShortLink(shortLink);
         Optional<Link> link = linkRepository.findByShortLink(shortLink);
         StatisticsResponse response = new StatisticsResponse();
         int rank = getPositionInTop(shortLink);

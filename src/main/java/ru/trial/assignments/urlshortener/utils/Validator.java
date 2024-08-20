@@ -1,37 +1,24 @@
 package ru.trial.assignments.urlshortener.utils;
 
 import lombok.experimental.UtilityClass;
+import ru.trial.assignments.urlshortener.exceptions.OriginalLinkErrorException;
+import ru.trial.assignments.urlshortener.exceptions.ShortLinkErrorException;
 
 @UtilityClass
 public class Validator {
 
-    public boolean validateUrl(String url) {
-        return url.matches("^(http|https)://.*$");
+    public void validateShortLink(String shortLink) {
+        String regex = "^[a-z]+\\d{2}\\.ly$";
+        if (!shortLink.matches(regex)) {
+            throw new ShortLinkErrorException("Invalid short link: " + shortLink);
+        }
     }
 
-    public boolean validateShortLink(String shortLink) {
-        return shortLink.matches("^[a-zA-Z0-9]*$");
+    public void validateOriginalLink(String originalLink) {
+        String regex = "^(http|https)://[\\w.-]+(?:\\.[\\w.-]+)+[/\\w.-]*$";
+        if (!originalLink.matches(regex)) {
+            throw new OriginalLinkErrorException("Invalid original link: " + originalLink);
+        }
     }
-
-    public boolean validateOriginalLink(String originalLink) {
-        return originalLink.matches("^(http|https)://.*$");
-    }
-
-    public boolean validateCount(Long count) {
-        return count >= 0;
-    }
-
-    public boolean validateRank(int rank) {
-        return rank >= 0;
-    }
-
-    public boolean validateTimeStamp(String timeStamp) {
-        return timeStamp.matches("^[0-9]*$");
-    }
-
-    public boolean validateId(Long id) {
-        return id >= 0;
-    }
-
 
 }

@@ -10,7 +10,13 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleEntityNotFoundException(final EntityNotFoundException e) {
-        return new ErrorResponse(String.format("validation error: %s", e.getMessage()));
+    public ErrorResponse handleOriginalLinkErrorException(final OriginalLinkErrorException e) {
+        return new ErrorResponse(String.format("Original link validation error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleShortLinkErrorException(final ShortLinkErrorException e) {
+        return new ErrorResponse(String.format("Short link validation error: %s", e.getMessage()));
     }
 }

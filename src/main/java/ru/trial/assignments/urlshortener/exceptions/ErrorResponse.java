@@ -1,11 +1,5 @@
 package ru.trial.assignments.urlshortener.exceptions;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public record ErrorResponse(String error) {
 
-@Data
-@AllArgsConstructor
-public class ErrorResponse {
-
-    private final String error;
 }
